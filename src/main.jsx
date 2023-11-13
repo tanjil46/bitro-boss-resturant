@@ -11,8 +11,19 @@ import {
 import Roots from './componets/Roots.jsx';
 import Home from './Homepage/Home.jsx';
 
+import {HelmetProvider } from 'react-helmet-async';
+import Foodmenus from './Foodmenupages/Foodmenus.jsx';
+import Ordermenu from './Order/Ordermenu.jsx';
+import LOgin from './componets/LOgin.jsx';
 
-
+import Resister from './componets/Resister.jsx';
+import AuthProvider from './componets/AuthProvider.jsx';
+import {
+  QueryClient,
+  QueryClientProvider
+ 
+} from '@tanstack/react-query'
+const queryClient = new QueryClient()
 const router=createBrowserRouter([
 
 {
@@ -23,6 +34,23 @@ const router=createBrowserRouter([
      {
       path:'/',
       element:<Home></Home>
+     },
+     {
+      path:'/menu',
+      element:<Foodmenus></Foodmenus>
+     },
+     {
+      path:'/order',
+      element:<Ordermenu></Ordermenu>
+     },
+     {
+      path:'/login',
+      element:<LOgin></LOgin>
+     },
+     
+     {
+      path:'/resister',
+      element:<Resister></Resister>
      }
 
 
@@ -54,8 +82,24 @@ const router=createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div className="max-w-screen-xl mx-auto">
+   <AuthProvider>
+
+
+   <QueryClientProvider client={queryClient}>
+     
+
+
+
+   <HelmetProvider>
+   <div className="max-w-screen-xl mx-auto">
     <RouterProvider router={router}></RouterProvider>
     </div>
+   </HelmetProvider>
+
+    </QueryClientProvider>
+
+
+
+   </AuthProvider>
   </React.StrictMode>,
 )

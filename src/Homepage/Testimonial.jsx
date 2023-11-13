@@ -37,7 +37,7 @@ const[review,setReview]=useState([])
       
       {
         review.map(view=><SwiperSlide>
-<div className="p-8">
+<div className="p-12">
 
 <Rating className="mx-auto"
       style={{ maxWidth: 180 }}

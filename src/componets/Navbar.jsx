@@ -1,7 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-import Icon from '../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png'
+ import Icon from '../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png'
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import { Result } from "postcss";
+import useCart from "../hooks/useCart";
 const Navbar = () => {
+
+
+const[cart]=useCart()
+const{user,userLogOut}=useContext(AuthContext)
+
+
+const userHanler=()=>{
+  userLogOut()
+  .then((result)=>{})
+  .catch(error=>console.log(error.message))
+}
+
+
+
+
+
     return (
       <div>
         <div className="navbar max-w-screen-xl fixed z-10 bg-opacity-30 bg-slate-500 text-white">
@@ -16,7 +36,7 @@ const Navbar = () => {
           <a>Parent</a>
           <ul className="p-2">
          
-          <Link>Dasboard</Link>
+          <Link to='/order'>Order Now</Link>
           <Link>Services</Link>
           </ul>
         </li>
@@ -27,17 +47,28 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal flex items-center space-x-5 font-bold px-1">
-    <Link>HOME</Link>
+    <Link to='/'>HOME</Link>
     <Link>CONTACT US</Link>
-    <Link>DESHBOARD</Link>
-    <Link>OUR MENU</Link>
-    <Link className="flex items-center">OUR SHOP
-     <img className="w-[40px]" src={Icon}></img>
+    <Link to='/order'>ORDER NOW</Link>
+    <Link to='/menu'>OUR MENU</Link>
+    <Link className="flex items-center">
+    <button className="btn">
+  <img className="w-[30px]" src={Icon}></img>
+  <div className="badge badge-secondary">+{cart.length}</div>
+</button>
     </Link>
+
+
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <img src="../assets/others/profile.png"></img>
+
+    {
+      user?<Link onClick={userHanler} className="font-bold ">SIGN OUT</Link>:
+      <Link className="font-bold" to='/login'>LOGIN</Link>
+
+    }
   </div>
 </div>
         </div>
