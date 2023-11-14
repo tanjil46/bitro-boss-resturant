@@ -51,7 +51,7 @@ const userHanler=()=>{
     <Link>CONTACT US</Link>
     <Link to='/order'>ORDER NOW</Link>
     <Link to='/menu'>OUR MENU</Link>
-    <Link className="flex items-center">
+    <Link to='/dash/mycart' className="flex items-center">
     <button className="btn">
   <img className="w-[30px]" src={Icon}></img>
   <div className="badge badge-secondary">+{cart.length}</div>

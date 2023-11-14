@@ -23,6 +23,8 @@ import {
   QueryClientProvider
  
 } from '@tanstack/react-query'
+import Dashboard from './componets/Dashboard.jsx';
+import Mycart from './Dasboards/Mycart.jsx';
 const queryClient = new QueryClient()
 const router=createBrowserRouter([
 
@@ -51,8 +53,8 @@ const router=createBrowserRouter([
      {
       path:'/resister',
       element:<Resister></Resister>
-     }
-
+     },
+   
 
 
 
@@ -60,6 +62,28 @@ const router=createBrowserRouter([
 
 
   ]
+},
+{
+
+   path:'dash',
+   element:<Dashboard></Dashboard>,
+   children:[
+     {
+      path:'mycart',
+      element:<Mycart></Mycart>
+     }
+
+
+
+
+
+   ]
+
+
+
+
+
+
 }
 
 
