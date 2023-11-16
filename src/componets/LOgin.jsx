@@ -1,24 +1,26 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useContext, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import { AuthContext } from './AuthProvider';
 
+import Google from './Google';
+
 const LOgin = () => {
-const [btnDisable,setDisable]=useState(true)
-const capchatRef=useRef(null)
+// const [btnDisable,setDisable]=useState(true)
+// const capchatRef=useRef(null)
 const{userSingIn}=useContext(AuthContext)
 const navigate=useNavigate()
-useEffect(()=>{
+// useEffect(()=>{
 
-    loadCaptchaEnginge(6); 
-
-
+//     loadCaptchaEnginge(6); 
 
 
 
-},[])
 
 
+// },[])
+
+const location=useLocation()
 
 const loginHanler=e=>{
 e.preventDefault()
@@ -28,24 +30,23 @@ const password=form.password.value
  userSingIn(email,password)
  .then((result)=>{
   console.log(result.user)
-  navigate('/')
+  navigate(location?.state?location.pathname:'/')
  })
 .catch(error=>console.log(error.message))
 }
 
 
-const capchaHanle=()=>{
-const USERCAPTCHA=capchatRef.current.value
+// const capchaHanle=()=>{
+// const USERCAPTCHA=capchatRef.current.value
 
- if(validateCaptcha(USERCAPTCHA)){
+//  if(validateCaptcha(USERCAPTCHA)){
 
-setDisable(false)
- }else{
-    setDisable(true)
- }
+// setDisable(false)
+//  }else{
+//     setDisable(true)
+//  }
 
-}
-
+// }
 
 
 
@@ -79,22 +80,24 @@ setDisable(false)
         </div>
 
 
-        <div className="form-control">
+        {/* <div className="form-control">
           <label className="label">
           <LoadCanvasTemplate />
           </label>
           <input ref={capchatRef} type="text" placeholder="type captcha" name="captcha" className="input input-bordered" required />
           <button onClick={capchaHanle} className="btn bg-slate-500 btn-xs">validate</button>
-       </div>
+       </div> */}
 
 
 
 
 
         <div className="form-control mt-6">
-          <button disabled={btnDisable} type="submit" className="btn btn-primary">Login</button>
+          <button  type="submit" className="btn btn-primary">Login</button>
         </div>
       </form>
+     <Google></Google>
+
       <Link className='btn bg-slate-500' to='/resister'>RESISTER</Link>
     </div>
   </div>

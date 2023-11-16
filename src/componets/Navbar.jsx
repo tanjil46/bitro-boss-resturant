@@ -62,7 +62,7 @@ const userHanler=()=>{
     </ul>
   </div>
   <div className="navbar-end">
-    <img src="../assets/others/profile.png"></img>
+    <img className="w-[30px] rounded-full" src={user && user.photoURL}></img>
 
     {
       user?<Link onClick={userHanler} className="font-bold ">SIGN OUT</Link>:

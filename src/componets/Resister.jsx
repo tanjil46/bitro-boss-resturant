@@ -1,25 +1,55 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
+import useAxiosOpen from "../hooks/useAxiosOpen";
+import Swal from "sweetalert2";
+import Google from "./Google";
 
 
 const Resister = () => {
 
 
 
-const {createUser}=useContext(AuthContext)
-
+const {createUser,updateUserProfile}=useContext(AuthContext)
+const openAxios=useAxiosOpen()
 const signHanler=e=>{
     e.preventDefault()
     const form =e.target
 const email=form.email.value
 const password=form.password.value
+const name=form.name.value
+const photoUrl=form.url.value
 
 createUser(email,password)
 .then((result)=>{
     console.log(result.user)
 
+
+updateUserProfile(name,photoUrl)
+.then((result)=>{
+
+
+  const userInfo={email,name,photoUrl}
+openAxios.post('/users',userInfo)
+.then(res=>{
+  console.log(res.data)
+  if(res.data.insertedId){
+    Swal.fire(
+      'success',
+      'Sucessfully user posted',
+      'success'
+    )
+  }
 })
+
+
+
+
+
+})
+
+})
+
 .catch(error=>console.log(error.message))
 
 
@@ -61,6 +91,13 @@ createUser(email,password)
 
 
 
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">PhotoUrl</span>
+          </label>
+          <input type="text" placeholder="email" name="url" className="input input-bordered" required />
+        </div>
+
 
 
         <div className="form-control">
@@ -79,15 +116,6 @@ createUser(email,password)
           </label>
         </div>
 
-{/* 
-        <div className="form-control">
-          <label className="label">
-          <LoadCanvasTemplate />
-          </label>
-          <input ref={capchatRef} type="text" placeholder="type captcha" name="captcha" className="input input-bordered" required />
-          <button onClick={capchaHanle} className="btn bg-slate-500 btn-xs">validate</button>
-       </div> */}
-
 
 
 
@@ -96,6 +124,7 @@ createUser(email,password)
           <button type="submit" className="btn btn-primary">Resister</button>
         </div>
       </form>
+      <Google></Google>
       <Link className='btn bg-slate-500' to='/login'>Login</Link>
     </div>
   </div>
