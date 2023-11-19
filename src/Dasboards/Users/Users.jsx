@@ -37,6 +37,15 @@ const axiosSecure=useAxios()
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed){
+
+
+
+
+
+
+
+
+          
      axiosSecure.delete(`/users/${id}`)
      .then(res=>{
         console.log(res.data)

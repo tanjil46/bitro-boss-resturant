@@ -7,10 +7,10 @@ const AdminPrivate = ({children}) => {
     const {user,loading}=useAuth()
     const[isAdmin,isAdminPending]=useAdmin()
     const location=useLocation()
-    if(loading || isAdminPending   ){
+    if(loading || isAdminPending){
         return <span className="loading loading-spinner loading-lg"></span>
     }
-    if(user || isAdmin ){
+    if(user && isAdmin ){
         return children
     }
     

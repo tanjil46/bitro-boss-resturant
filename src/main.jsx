@@ -27,6 +27,11 @@ import Dashboard from './componets/Dashboard.jsx';
 import Mycart from './Dasboards/Mycart.jsx';
 import PrivateRoute from './componets/PrivateRoute.jsx';
 import Users from './Dasboards/Users/Users.jsx';
+import AddItems from './Dasboards/AddItems.jsx';
+import AdminPrivate from './componets/AdminPrivate.jsx';
+import Manageitems from './Dasboards/Manageitems.jsx';
+import Payment from './Dasboards/payment/Payment.jsx';
+
 const queryClient = new QueryClient()
 const router=createBrowserRouter([
 
@@ -70,13 +75,25 @@ const router=createBrowserRouter([
    path:'dash',
    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
    children:[
+    {
+      path:'items',
+      element:<AdminPrivate><AddItems></AddItems></AdminPrivate>
+    },
      {
       path:'mycart',
       element:<Mycart></Mycart>
      },
      {
       path:'users',
-      element:<Users></Users>
+      element:<AdminPrivate><Users></Users></AdminPrivate>
+     },
+     {
+      path:'manage',
+      element:<AdminPrivate><Manageitems></Manageitems></AdminPrivate>
+     },
+     {
+      path:'pay',
+      element:<Payment></Payment>
      }
 
 

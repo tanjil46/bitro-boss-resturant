@@ -2,6 +2,7 @@ import { FaTrash } from "react-icons/fa";
 import useCart from "../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxios from "../hooks/useAxios";
+import { Link } from "react-router-dom";
 
 
 const Mycart = () => {
@@ -10,7 +11,6 @@ const Mycart = () => {
     const[cart,refetch]=useCart()
 
     const totalPrize=cart.reduce((sum,carts)=>sum+carts.price,0)
-
 const axiosSecure=useAxios()
 
  const deleteHandler=(id)=>{
@@ -67,7 +67,7 @@ const axiosSecure=useAxios()
             <div className="flex justify-evenly">
             <h2 className="text-4xl">Items:{cart.length}</h2>
             <h2 className="text-4xl">Total Price:{totalPrize}</h2>
-            <button className="btn btn-primary">Pay</button>
+            <Link disabled={!cart.length} to='/dash/pay' className="btn btn-primary">Pay</Link>
         
 
             </div>

@@ -57,25 +57,25 @@ const openAxios=useAxiosOpen()
        
           setUser(currentUser)
           const userInfo={email:currentUser.email}
-
+         
           if(currentUser){
             openAxios.post('/jwt',userInfo)
             .then(res=>{
             console.log(res.data)
              if(res.data.token){
               localStorage.setItem('access_token',res.data.token)
-             }
+             } 
 
 
             })
-          }
-          else{
+          }else{
 
-          localStorage.removeItem('access_token')
-
-
-          }
-
+            localStorage.removeItem('access_token')
+  
+  
+            }
+  
+         
 
           setLoading(false)
 
