@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import useCart from "../../hooks/useCart";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const CheckOutForm = () => {
@@ -18,11 +19,16 @@ const Totalprice=(cart.reduce((sum,carts)=>sum+carts.price,0))
 const{user}=useAuth()
 
 useEffect(()=>{
+if(Totalprice>0){
 axiosSecure.post('/create-payment-intent',{price:Totalprice})
 .then(res=>{
-    console.log(res.data)
-    setSecretClient(res.data.clientSecret)
-})
+ console.log(res.data)
+ setSecretClient(res.data.clientSecret)
+    })
+
+}
+
+
 
 
 
@@ -82,8 +88,32 @@ if(confrimError){
     console.log('confrim payment error',confrimError)
 }else{
     console.log('confrim payment intent',paymentIntent)
-    if(paymentIntent==='succeeded'){
+    if(paymentIntent.status==='succeeded'){
        setTransationId(paymentIntent.id)
+
+      const paymentInfo={
+        email:user.email,
+        price:Totalprice,
+        transitionId:paymentIntent.id,
+        date:new Date(),
+        cartId:cart.map(item=>item._id),
+        menuId:cart.map(item=>item.menuId),
+        status:'pending'
+}
+
+  const res=await axiosSecure.post('/payment',paymentInfo)
+    console.log('payment saved',res.data)
+      if(res.data.result.insertedId){
+        Swal.fire(
+          'success',
+          'Thank You For Payment',
+          'success'
+        )
+      }
+
+
+
+
     }
 }
 

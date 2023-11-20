@@ -31,6 +31,7 @@ import AddItems from './Dasboards/AddItems.jsx';
 import AdminPrivate from './componets/AdminPrivate.jsx';
 import Manageitems from './Dasboards/Manageitems.jsx';
 import Payment from './Dasboards/payment/Payment.jsx';
+import PaymentHistory from './Dasboards/payment/PaymentHistory.jsx';
 
 const queryClient = new QueryClient()
 const router=createBrowserRouter([
@@ -61,7 +62,7 @@ const router=createBrowserRouter([
       path:'/resister',
       element:<Resister></Resister>
      },
-   
+    
 
 
 
@@ -94,6 +95,9 @@ const router=createBrowserRouter([
      {
       path:'pay',
       element:<Payment></Payment>
+     },{
+      path:'history',
+      element:<PaymentHistory></PaymentHistory>
      }
 
 

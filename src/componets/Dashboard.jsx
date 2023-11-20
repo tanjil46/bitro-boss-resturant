@@ -49,10 +49,6 @@ const Dashboard = () => {
      User Home</NavLink>
 
 
-     <NavLink to='/dash/reserv' className='text-white'>
-     <FaCalendar></FaCalendar>
-     Reservation</NavLink>
-
  <NavLink to='/dash/mycart' className='text-white'>
      <FaShoppingCart></FaShoppingCart>
      My Cart</NavLink>
@@ -61,6 +57,14 @@ const Dashboard = () => {
      <NavLink to='/dash/review' className='text-white'>
      <FaAd></FaAd>
      Add Review</NavLink>
+
+
+
+     <NavLink to='/dash/history' className='text-white'>
+     <FaCalendar></FaCalendar>
+     My Payment History</NavLink>
+
+
 
 
      <NavLink to='/dash/boking' className='text-white'>
