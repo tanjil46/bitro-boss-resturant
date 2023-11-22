@@ -5,6 +5,7 @@ import Hadlines from "../../componets/Hadlines";
 
 
 
+
 const PaymentHistory = () => {
     const{user}=useAuth()
       const axiosSecure=useAxios()
@@ -19,7 +20,7 @@ const PaymentHistory = () => {
     return (
         <div>
             <Hadlines heading={'--At A Glance'} subHeading={'PAYMENTS HISTORY'}></Hadlines>
-            <p className="text-3xl my-5">Total Payments:{payments.length}</p>
+            <p className="text-3xl my-5">Total Payments:{payments?.length}</p>
             <div className="overflow-x-auto ">
   <table className="table w-full">
     {/* head */}
@@ -40,7 +41,7 @@ const PaymentHistory = () => {
     <tbody>
 
 {
-    payments.map((item,index)=> <tr>
+    payments?.map((item,index)=> <tr>
         <th>
           {index+1}
         </th>
@@ -71,7 +72,15 @@ const PaymentHistory = () => {
    
     
   </table>
+
+
 </div>
+
+
+
+
+
+
         </div>
     );
 };

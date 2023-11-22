@@ -5,11 +5,13 @@ import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import { Result } from "postcss";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 const Navbar = () => {
 
 
 const[cart]=useCart()
 const{user,userLogOut}=useContext(AuthContext)
+const[isAdmin]=useAdmin()
 
 
 const userHanler=()=>{
@@ -51,12 +53,50 @@ const userHanler=()=>{
     <Link>CONTACT US</Link>
     <Link to='/order'>ORDER NOW</Link>
     <Link to='/menu'>OUR MENU</Link>
-    <Link to='/dash' className="flex items-center">
+
+   {
+    user&& isAdmin&& <Link to='/dash/adminhome'>DASHBOARD</Link>
+  
+   
+
+    }
+    
+    {
+      user&& !isAdmin&&<Link to='/dash/userhome'>DASHBOARD</Link>
+    }
+
+
+
+
+
+
+
+
+
+
+     {
+
+    user? !isAdmin&&  <Link to='/dash/mycart' className="flex items-center">
     <button className="btn">
   <img className="w-[30px]" src={Icon}></img>
   <div className="badge badge-secondary">+{cart.length}</div>
-</button>
-    </Link>
+ </button>
+     </Link>:''
+   
+
+
+
+
+
+     }
+
+
+   
+   
+ 
+
+
+
 
 
     </ul>

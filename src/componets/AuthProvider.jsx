@@ -64,6 +64,7 @@ const openAxios=useAxiosOpen()
             console.log(res.data)
              if(res.data.token){
               localStorage.setItem('access_token',res.data.token)
+              setLoading(false)
              } 
 
 
@@ -71,13 +72,12 @@ const openAxios=useAxiosOpen()
           }else{
 
             localStorage.removeItem('access_token')
-  
+            setLoading(false)
   
             }
   
          
 
-          setLoading(false)
 
 
 

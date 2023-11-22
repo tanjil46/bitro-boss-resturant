@@ -32,6 +32,8 @@ import AdminPrivate from './componets/AdminPrivate.jsx';
 import Manageitems from './Dasboards/Manageitems.jsx';
 import Payment from './Dasboards/payment/Payment.jsx';
 import PaymentHistory from './Dasboards/payment/PaymentHistory.jsx';
+import AdminHome from './Dasboards/Admin Home/AdminHome.jsx';
+import UserHome from './Dasboards/User Home/UserHome.jsx';
 
 const queryClient = new QueryClient()
 const router=createBrowserRouter([
@@ -98,6 +100,14 @@ const router=createBrowserRouter([
      },{
       path:'history',
       element:<PaymentHistory></PaymentHistory>
+     },
+     {
+      path:'adminhome',
+      element:<AdminPrivate><AdminHome></AdminHome></AdminPrivate>
+     },
+     {
+      path:'userhome',
+      element:<UserHome></UserHome>
      }
 
 
